@@ -26,3 +26,15 @@ df_despesas_graph_01 = df_despesas.groupby('COMPETÊNCIA', sort=False).agg({'VAL
 df_year_cashflow = pd.merge(df_receitas_graph_01, df_despesas_graph_01, how='inner',on='COMPETÊNCIA')
 df_year_cashflow['CASH_FLOW'] = df_year_cashflow['VALOR_RECEITA']-df_year_cashflow['VALOR_DESPESA']
 
+#dataframe analise receitas/despesas
+df_filter_incomes_detail = df_receitas.groupby('CATEGORIA').agg({'VALOR_RECEITA':'sum'})
+df_filter_incomes_detail = df_filter_incomes_detail.reset_index()
+
+df_filter_expenses_detail = df_despesas.groupby('CATEGORIA').agg({'VALOR_DESPESA':'sum'})
+df_filter_expenses_detail = df_filter_expenses_detail.reset_index()
+
+df_filter_expenses_months = df_despesas.groupby(['COMPETÊNCIA','CATEGORIA']).agg({'VALOR_DESPESA':'sum'})
+df_filter_expenses_months = df_filter_expenses_months.reset_index()
+
+df_filter_incomes_months = df_receitas.groupby(['COMPETÊNCIA','CATEGORIA']).agg({'VALOR_RECEITA':'sum'})
+df_filter_incomes_months = df_filter_incomes_months.reset_index()
