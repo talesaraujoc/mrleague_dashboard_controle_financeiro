@@ -11,9 +11,9 @@ from plotly.subplots import make_subplots
 import dash_ag_grid as dag
 
 # Servidor
-load_figure_template("bootstrap")
+load_figure_template("minty")
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(external_stylesheets=[dbc.themes.MINTY])
 server = app.server
 
 # DataFrame =================
