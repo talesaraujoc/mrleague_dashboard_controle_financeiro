@@ -137,9 +137,11 @@ def set_drop(set):
 @app.callback(
     Output('grafico-01-r4/c1', 'figure'),
     Input('dpd-01-r3/c1', 'value'),
-    Input('dpd-02-r3/c2', 'value')
+    Input('dpd-02-r3/c2', 'value'),
+    Input('disparador-geral-meses', 'value')
 )
-def update_grafico_01(parametro_esq, parametro_dir):
+def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):  
+     
     if parametro_esq == 'Análise':
         fig = go.Figure()
         return fig
@@ -147,12 +149,12 @@ def update_grafico_01(parametro_esq, parametro_dir):
         if parametro_dir == 'Fluxo caixa mes/mes':
             fig = make_subplots(rows=1, cols=1)
 
-            fig.add_trace(go.Bar(x=df_receitas_graph_01.index, y=df_receitas_graph_01['VALOR_RECEITA'], showlegend=False, name='Receita'), row=1, col=1)
+            fig.add_trace(go.Bar(x=df_receitas_graph_01['COMPETÊNCIA'], y=df_receitas_graph_01['VALOR_RECEITA'], showlegend=False, name='Receita'), row=1, col=1)
 
-            fig.add_trace(go.Bar(x=df_despesas_graph_01.index, y=df_despesas_graph_01['VALOR_DESPESA'], showlegend=False, name='Despesa'), row=1, col=1)
+            fig.add_trace(go.Bar(x=df_despesas_graph_01['COMPETÊNCIA'], y=df_despesas_graph_01['VALOR_DESPESA'], showlegend=False, name='Despesa'), row=1, col=1)
             return fig
         else:
-            fig_year_cashflow = go.Figure(data=go.Bar(x=df_year_cashflow.index, y=df_year_cashflow['CASH_FLOW']))
+            fig_year_cashflow = go.Figure(data=go.Bar(x=df_year_cashflow['COMPETÊNCIA'], y=df_year_cashflow['CASH_FLOW']))
             return fig_year_cashflow
 # Servidor
 if __name__=='__main__':
