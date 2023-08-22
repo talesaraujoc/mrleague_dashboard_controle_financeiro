@@ -21,6 +21,7 @@ server = app.server
 from globals import *
 
 # Pré-layout ================
+update_grafico = {'margin': {'l':0, 'r':0, 't': 10, 'b':0}}
 
 card_receita = dbc.Card(
     dbc.CardBody(
@@ -53,6 +54,10 @@ card_resultado_mes= dbc.Card(
 )
 
 
+fig_evolucao_caixa = go.Figure(go.Scatter(x=df_year_cashflow['COMPETÊNCIA'], y=df_year_cashflow['caixa']))
+fig_evolucao_caixa = fig_evolucao_caixa.update_layout(height=300)
+fig_evolucao_caixa = fig_evolucao_caixa.update_layout(update_grafico)
+
 # Layout ====================
 app.layout = html.Div([
         dbc.Row(dcc.Dropdown(options=lista_meses, value=lista_meses[-1], id='disparador-geral-meses')),
@@ -64,7 +69,9 @@ app.layout = html.Div([
                 dbc.Col([dcc.Dropdown(id='dpd-02-r3/c2')], lg=6)
                 ]),
         
-        dbc.Row([dbc.Col([dcc.Graph(id='grafico-01-r4/c1')], lg=8), dbc.Col([dcc.Graph(id='grafico-02-r4/c2')], lg=4)])
+        dbc.Row([dbc.Col([dcc.Graph(id='grafico-01-r4/c1', config={"displayModeBar": False, "showTips": False})], lg=7), dbc.Col([], lg=5)]),
+        
+        dbc.Row([dbc.Col([html.H5('Evolução Caixa'), dcc.Graph(figure=fig_evolucao_caixa, config={"displayModeBar": False, "showTips": False})], lg=6), dbc.Col([html.H5('Check | Mensalidades')], lg=6)])
 ])
 
 
@@ -152,9 +159,18 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
         if parametro_esq == 'Análise':
             if parametro_dir == 'Despesas por Categoria':
                 fig = go.Figure(data=go.Pie(labels=df_filter_expenses_detail['CATEGORIA'], values=df_filter_expenses_detail['VALOR_DESPESA'], hole=0.6))
+                
+                
+                fig.update_layout(height=350)
+                fig.update_layout(update_grafico)
+                
                 return fig
             else:
                 fig = go.Figure(data=go.Pie(labels=df_filter_incomes_detail['CATEGORIA'], values=df_filter_incomes_detail['VALOR_RECEITA'], hole=0.6))
+                
+                fig.update_layout(height=350)
+                fig.update_layout(update_grafico)
+                
                 return fig
                 
         else:
@@ -165,9 +181,17 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
                 fig.add_trace(go.Bar(x=df_receitas_graph_01['COMPETÊNCIA'], y=df_receitas_graph_01['VALOR_RECEITA'], showlegend=False, name='Receita'), row=1, col=1)
 
                 fig.add_trace(go.Bar(x=df_despesas_graph_01['COMPETÊNCIA'], y=df_despesas_graph_01['VALOR_DESPESA'], showlegend=False, name='Despesa'), row=1, col=1)
+                
+                fig.update_layout(height=350)
+                fig.update_layout(update_grafico)
+                
                 return fig
             else:
                 fig_year_cashflow = go.Figure(data=go.Bar(x=df_year_cashflow['COMPETÊNCIA'], y=df_year_cashflow['CASH_FLOW']))
+                
+                fig_year_cashflow.update_layout(height=350)
+                fig_year_cashflow.update_layout(update_grafico)
+                
                 return fig_year_cashflow
     
     else:
@@ -180,9 +204,17 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
         if parametro_esq == 'Análise':
             if parametro_dir == 'Despesas por Categoria':
                 fig = go.Figure(data=go.Pie(labels=df_despesas_target_beta['CATEGORIA'], values=df_despesas_target_beta['VALOR_DESPESA'], hole=0.6))
+                
+                fig.update_layout(height=350)
+                fig.update_layout(update_grafico)
+                
                 return fig
             else:
                 fig = go.Figure(data=go.Pie(labels=df_receitas_target_beta['CATEGORIA'], values=df_receitas_target_beta['VALOR_RECEITA'], hole=0.6))
+                
+                fig.update_layout(height=350)
+                fig.update_layout(update_grafico)
+                
                 return fig
         else:
             if parametro_dir == 'Fluxo caixa mes/mes':
@@ -192,11 +224,17 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
                 fig.add_trace(go.Bar(x=df_receitas_target['COMPETÊNCIA'], y=df_receitas_target['VALOR_RECEITA'], showlegend=False, name='Receita'), row=1, col=1)
 
                 fig.add_trace(go.Bar(x=df_despesas_target['COMPETÊNCIA'], y=df_despesas_target['VALOR_DESPESA'], showlegend=False, name='Despesa'), row=1, col=1)
+                
+                fig.update_layout(height=350)
+                fig.update_layout(update_grafico)
+                
                 return fig
             else:
                 fig_year_cashflow = go.Figure(data=go.Bar(x=df_year_cashflow['COMPETÊNCIA'], y=df_year_cashflow['CASH_FLOW']))
+                
+                fig_year_cashflow.update_layout(height=350)
+                fig_year_cashflow.update_layout(update_grafico)
                 return fig_year_cashflow
-
 
 
 # Servidor

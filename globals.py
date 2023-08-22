@@ -8,6 +8,9 @@ df_despesas = pd.read_excel('data/despesas_2022.xlsx')
 df_receitas.rename(columns={"VALOR": "VALOR_RECEITA"}, inplace=True)
 df_despesas.rename(columns={"VALOR":'VALOR_DESPESA'}, inplace=True)
 
+#lista_despesas
+lista_categorias_despesas = df_despesas['CATEGORIA'].unique()
+
 # lista meses
 lista_meses = df_receitas['COMPETÊNCIA'].unique().tolist()
 lista_meses.append('Ano')
@@ -25,6 +28,7 @@ df_despesas_graph_01 = df_despesas.groupby('COMPETÊNCIA', sort=False).agg({'VAL
 #dataframe year_cashflow
 df_year_cashflow = pd.merge(df_receitas_graph_01, df_despesas_graph_01, how='inner',on='COMPETÊNCIA')
 df_year_cashflow['CASH_FLOW'] = df_year_cashflow['VALOR_RECEITA']-df_year_cashflow['VALOR_DESPESA']
+df_year_cashflow['caixa'] = df_year_cashflow['CASH_FLOW'].cumsum()
 
 #dataframe analise receitas/despesas
 df_filter_incomes_detail = df_receitas.groupby('CATEGORIA').agg({'VALOR_RECEITA':'sum'})
@@ -38,3 +42,5 @@ df_filter_expenses_months = df_filter_expenses_months.reset_index()
 
 df_filter_incomes_months = df_receitas.groupby(['COMPETÊNCIA','CATEGORIA']).agg({'VALOR_RECEITA':'sum'})
 df_filter_incomes_months = df_filter_incomes_months.reset_index()
+
+
