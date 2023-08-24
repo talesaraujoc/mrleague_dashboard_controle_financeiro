@@ -19,7 +19,7 @@ lista_meses.append('Ano')
 
 # lista opções gráficos
 lista_drop_esquerda = ['Análise', 'Fluxo de Caixa']
-lista_filtragem_categoria = ['Receitas por categoria', 'Despesas por Categoria']
+lista_filtragem_categoria = ['Receitas por categoria', 'Despesas por categoria']
 lista_tipo_fluxo_caixa = ['Fluxo caixa mes/mes', 'Cashflow ano']
 
 

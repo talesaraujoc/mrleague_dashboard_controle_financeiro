@@ -166,7 +166,7 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
     if parametro_superior == 'Ano':
         
         if parametro_esq == 'Análise':
-            if parametro_dir == 'Despesas por Categoria':
+            if parametro_dir == 'Despesas por categoria':
                 fig = go.Figure(data=go.Pie(labels=df_filter_expenses_detail['CATEGORIA'], values=df_filter_expenses_detail['VALOR_DESPESA'], hole=0.6))
                 
                 
@@ -251,17 +251,48 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
     Input('disparador-geral-meses', 'value')
 )
 def update_texto(parametro, mes):
-    receita_mensalidade = df_filter_incomes_months[df_filter_incomes_months['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].values
-    receita_mensalidade = receita_mensalidade[0]
-    receita_diaristas = df_filter_incomes_months[df_filter_incomes_months['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].values
-    receita_diaristas = receita_diaristas[0]
-    
+        
     if parametro == 'Receitas por categoria':
+        receita_mensalidade = df_filter_incomes_months[df_filter_incomes_months['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].values
+        receita_mensalidade = receita_mensalidade[0]
+        receita_diaristas = df_filter_incomes_months[df_filter_incomes_months['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].values
+        receita_diaristas = receita_diaristas[0]
+        
         card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Receitas por categoria')), lg=12)), 
-                                  dbc.Row([dbc.Col(dbc.CardBody([html.Header('Mensalistas'), html.Header('Diaristas')]), lg=6), dbc.Col(dbc.CardBody([html.H6(f"R$ {receita_mensalidade}"), html.H6(f"R$ {receita_diaristas}")]), lg=6)])
+                                  dbc.Row([dbc.Col(dbc.CardBody([html.Header('Mensalistas'), 
+                                                                 html.Header('Diaristas')]), lg=6), 
+                                           dbc.Col(dbc.CardBody([html.H6(f"R$ {receita_mensalidade}"), 
+                                                                 html.H6(f"R$ {receita_diaristas}")]), lg=6)])
                                   ])
                          ])
         return card
+    
+    elif parametro == 'Despesas por categoria':
+        despesa_campo = df_filter_expenses_months[df_filter_expenses_months['CATEGORIA']=='Campo']['VALOR_DESPESA'].values
+        despesa_campo = despesa_campo[0]
+        despesa_juiz = df_filter_expenses_months[df_filter_expenses_months['CATEGORIA']=='Juíz']['VALOR_DESPESA'].values
+        despesa_juiz = despesa_juiz[0]
+        despesa_goleiro = df_filter_expenses_months[df_filter_expenses_months['CATEGORIA']=='Goleiro']['VALOR_DESPESA'].values
+        despesa_goleiro = despesa_goleiro[0]
+
+        card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Despesas por categoria')), lg=12)), 
+                                  dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
+                                                                 html.Header('Juíz'),
+                                                                 html.Header('Goleiro'),
+                                                                 html.Header('Premiações'),
+                                                                 html.Header('Confraternização'),
+                                                                 html.Header('Insumos'),
+                                                                 html.Header('Despesas Diversas')
+                                                                 ]), lg=6), 
+                                           dbc.Col(dbc.CardBody([html.H6(f"R$ {despesa_campo}"), 
+                                                                 html.H6(f"R$ {despesa_juiz}"),
+                                                                 html.H6(f"R$ {despesa_goleiro}"),
+
+                                                                 ]), lg=6)])
+                                  ])
+                         ])
+        return card
+        
     else:
         cabecalho = html.H6('Cashflow')
         return cabecalho
