@@ -58,6 +58,11 @@ fig_evolucao_caixa = go.Figure(go.Scatter(x=df_year_cashflow['COMPETÊNCIA'], y=
 fig_evolucao_caixa = fig_evolucao_caixa.update_layout(height=300)
 fig_evolucao_caixa = fig_evolucao_caixa.update_layout(update_grafico)
 
+
+nome_receita = html.Header('Receita: ')
+nome_despesa = html.Header('Despesa: ')
+
+disparador = nome_receita
 # Layout ====================
 app.layout = html.Div([
         dbc.Row(dcc.Dropdown(options=lista_meses, value=lista_meses[-1], id='disparador-geral-meses')),
@@ -69,7 +74,11 @@ app.layout = html.Div([
                 dbc.Col([dcc.Dropdown(id='dpd-02-r3/c2')], lg=6)
                 ]),
         
-        dbc.Row([dbc.Col([dcc.Graph(id='grafico-01-r4/c1', config={"displayModeBar": False, "showTips": False})], lg=7), dbc.Col([], lg=5)]),
+        dbc.Row([dbc.Col([dcc.Graph(id='grafico-01-r4/c1', config={"displayModeBar": False, "showTips": False})], lg=7), dbc.Col(
+                                                                                                                                [
+                                                                                                                                html.Div(id='disparador_texto')
+                                                                                                                                    ], 
+                                                                                                                                 lg=5)]),
         
         dbc.Row([dbc.Col([html.H5('Evolução Caixa'), dcc.Graph(figure=fig_evolucao_caixa, config={"displayModeBar": False, "showTips": False})], lg=6), dbc.Col([html.H5('Check | Mensalidades')], lg=6)])
 ])
@@ -235,6 +244,18 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
                 fig_year_cashflow.update_layout(height=350)
                 fig_year_cashflow.update_layout(update_grafico)
                 return fig_year_cashflow
+
+@app.callback(
+    Output('disparador_texto', 'children'),
+    Input('dpd-02-r3/c2', 'value')
+)
+def update_texto(parametro):
+    if parametro == 'Receitas por categoria':
+        cabecalho = html.H5('Receitas por Categoria')
+        return cabecalho
+    else:
+        cabecalho = html.H6('Cashflow')
+        return cabecalho
 
 
 # Servidor
