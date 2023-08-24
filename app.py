@@ -247,12 +247,21 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
 
 @app.callback(
     Output('disparador_texto', 'children'),
-    Input('dpd-02-r3/c2', 'value')
+    Input('dpd-02-r3/c2', 'value'),
+    Input('disparador-geral-meses', 'value')
 )
-def update_texto(parametro):
+def update_texto(parametro, mes):
+    receita_mensalidade = df_filter_incomes_months[df_filter_incomes_months['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].values
+    receita_mensalidade = receita_mensalidade[0]
+    receita_diaristas = df_filter_incomes_months[df_filter_incomes_months['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].values
+    receita_diaristas = receita_diaristas[0]
+    
     if parametro == 'Receitas por categoria':
-        cabecalho = html.H5('Receitas por Categoria')
-        return cabecalho
+        card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Receitas por categoria')), lg=12)), 
+                                  dbc.Row([dbc.Col(dbc.CardBody([html.Header('Mensalistas'), html.Header('Diaristas')]), lg=6), dbc.Col(dbc.CardBody([html.H6(f"R$ {receita_mensalidade}"), html.H6(f"R$ {receita_diaristas}")]), lg=6)])
+                                  ])
+                         ])
+        return card
     else:
         cabecalho = html.H6('Cashflow')
         return cabecalho

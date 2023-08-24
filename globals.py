@@ -1,8 +1,8 @@
 import pandas as pd
 
 #dataframes
-df_receitas = pd.read_excel('data/receitas_2022.xlsx')
-df_despesas = pd.read_excel('data/despesas_2022.xlsx')
+df_receitas = pd.read_excel('data/receitas_2023.xlsx')
+df_despesas = pd.read_excel('data/despesas_2023.xlsx')
 
 #primeira alteração dataset
 df_receitas.rename(columns={"VALOR": "VALOR_RECEITA"}, inplace=True)
