@@ -253,167 +253,334 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
 def update_texto(parametro, mes):
     
     
-    
-    if parametro == 'Receitas por categoria':
-        receita_mensalidade = df_filter_incomes_months[df_filter_incomes_months['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].values
-        receita_mensalidade = receita_mensalidade[0]
-        receita_diaristas = df_filter_incomes_months[df_filter_incomes_months['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].values
-        receita_diaristas = receita_diaristas[0]
+    if mes == 'Ano':
+        if parametro == 'Receitas por categoria':
+            receita_mensalidade = df_filter_incomes_detail[df_filter_incomes_detail['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].values
+            receita_mensalidade = receita_mensalidade[0]
+            receita_diaristas = df_filter_incomes_detail[df_filter_incomes_detail['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].values
+            receita_diaristas = receita_diaristas[0]
+                
+            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Receitas por categoria')), lg=12)), 
+                                        dbc.Row([dbc.Col(dbc.CardBody([html.Header('Mensalistas'), 
+                                                                        html.Header('Diaristas')]), lg=6), 
+                                                dbc.Col(dbc.CardBody([html.Header(f"R$ {receita_mensalidade}"), 
+                                                                        html.Header(f"R$ {receita_diaristas}")]), lg=6)])
+                                        ])
+                                ])
+            return card
         
-        card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Receitas por categoria')), lg=12)), 
-                                  dbc.Row([dbc.Col(dbc.CardBody([html.Header('Mensalistas'), 
-                                                                 html.Header('Diaristas')]), lg=6), 
-                                           dbc.Col(dbc.CardBody([html.Header(f"R$ {receita_mensalidade}"), 
-                                                                 html.Header(f"R$ {receita_diaristas}")]), lg=6)])
-                                  ])
-                         ])
-        return card
-    
-    elif parametro == 'Despesas por categoria':
-        despesa_campo = df_filter_expenses_months[df_filter_expenses_months['CATEGORIA']=='Campo']['VALOR_DESPESA'].values
-        despesa_campo = despesa_campo[0]
-        despesa_juiz = df_filter_expenses_months[df_filter_expenses_months['CATEGORIA']=='Juíz']['VALOR_DESPESA'].values
-        despesa_juiz = despesa_juiz[0]
-        despesa_goleiro = df_filter_expenses_months[df_filter_expenses_months['CATEGORIA']=='Goleiro']['VALOR_DESPESA'].values
-        despesa_goleiro = despesa_goleiro[0]
+        elif parametro == 'Despesas por categoria':
+            despesa_campo = df_filter_expenses_detail[df_filter_expenses_detail['CATEGORIA']=='Campo']['VALOR_DESPESA'].values
+            despesa_campo = despesa_campo[0]
+            despesa_juiz = df_filter_expenses_detail[df_filter_expenses_detail['CATEGORIA']=='Juíz']['VALOR_DESPESA'].values
+            despesa_juiz = despesa_juiz[0]
+            despesa_goleiro = df_filter_expenses_detail[df_filter_expenses_detail['CATEGORIA']=='Goleiro']['VALOR_DESPESA'].values
+            despesa_goleiro = despesa_goleiro[0]
 
-        card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Despesas por categoria')), lg=12)), 
-                                  dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
-                                                                 html.Header('Juíz'),
-                                                                 html.Header('Goleiro'),
-                                                                 ]), lg=6), 
-                                           dbc.Col(dbc.CardBody([html.Header(f"R$ {despesa_campo}"), 
-                                                                 html.Header(f"R$ {despesa_juiz}"),
-                                                                 html.Header(f"R$ {despesa_goleiro}"),
+            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Despesas por categoria')), lg=12)), 
+                                        dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
+                                                                        html.Header('Juíz'),
+                                                                        html.Header('Goleiro'),
+                                                                        ]), lg=6), 
+                                                dbc.Col(dbc.CardBody([html.Header(f"R$ {despesa_campo}"), 
+                                                                        html.Header(f"R$ {despesa_juiz}"),
+                                                                        html.Header(f"R$ {despesa_goleiro}"),
 
-                                                                 ]), lg=6)])
-                                  ])
-                         ])
-        return card
-    
-    elif parametro == 'Fluxo caixa mes/mes':
-        card = dbc.Card([dbc.Row(dbc.CardBody([
-                                    dbc.Row(dbc.Col(html.H6("Balanço mensal"), lg=12)),
-                                    dbc.Row([
-                                            dbc.Col([html.Header("Jan"),
-                                                                  html.Header('Receita'), 
-                                                                 html.Header('Despesa'),
-                                                                 html.Br(),
-                                                                 html.Header("Fev"),
-                                                                 html.Header("Receita"),
-                                                                 html.Header("Despesa"),
-                                                                 html.Br(),
-                                                                 html.Header("Mar"),
-                                                                 html.Header("Receita"),
-                                                                 html.Header("Despesa"),
-                                                                 html.Br(),
-                                                                 html.Header("Abr"),
-                                                                 html.Header("Receita"),
-                                                                 html.Header("Despesa")
-                                                                 ],style={'margin':'0px'}, lg=2), 
-                                            dbc.Col([html.Br(),
-                                                                  html.Header(f"R$ "), 
-                                                                 html.Header(f"R$ "),
-                                                                 html.Br(),
-                                                                 html.Br(),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Br(),
-                                                                 html.Br(),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Br(),
-                                                                 html.Br(),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Header(f"R$ ")
-                                                                 ], lg=2),
-                                            dbc.Col([html.Header("Mai"),
-                                                                  html.Header('Receita'), 
-                                                                 html.Header('Despesa'),
-                                                                 html.Br(),
-                                                                 html.Header("Jun"),
-                                                                 html.Header("Receita"),
-                                                                 html.Header("Despesa"),
-                                                                 html.Br(),
-                                                                 html.Header("Jul"),
-                                                                 html.Header("Receita"),
-                                                                 html.Header("Despesa"),
-                                                                 html.Br(),
-                                                                 html.Header("Ago"),
-                                                                 html.Header("Receita"),
-                                                                 html.Header("Despesa")
-                                                                 ], lg=2), 
-                                            dbc.Col([html.Br(),
-                                                                  html.Header(f"R$ "), 
-                                                                 html.Header(f"R$ "),
-                                                                 html.Br(),
-                                                                 html.Br(),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Br(),
-                                                                 html.Br(),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Br(),
-                                                                 html.Br(),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Header(f"R$ ")
-                                                                 ], lg=2),
-                                            dbc.Col([html.Header("Set"),
-                                                                  html.Header('Receita'), 
-                                                                 html.Header('Despesa'),
-                                                                 html.Br(),
-                                                                 html.Header("Out"),
-                                                                 html.Header("Receita"),
-                                                                 html.Header("Despesa"),
-                                                                 html.Br(),
-                                                                 html.Header("Nov"),
-                                                                 html.Header("Receita"),
-                                                                 html.Header("Despesa"),
-                                                                 html.Br(),
-                                                                 html.Header("Dez"),
-                                                                 html.Header("Receita"),
-                                                                 html.Header("Despesa")
-                                                                 ], lg=2), 
-                                            dbc.Col([html.Br(),
-                                                                  html.Header(f"R$ "), 
-                                                                 html.Header(f"R$ "),
-                                                                 html.Br(),
-                                                                 html.Br(),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Br(),
-                                                                 html.Br(),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Br(),
-                                                                 html.Br(),
-                                                                 html.Header(f"R$ "),
-                                                                 html.Header(f"R$ "),
-                                                                 ], lg=2),
+                                                                        ]), lg=6)])
+                                        ])
+                                ])
+            return card
+        
+        elif parametro == 'Fluxo caixa mes/mes':
+            card = dbc.Card([dbc.Row(dbc.CardBody([
+                                        dbc.Row(dbc.Col(html.H6("Balanço mensal"), lg=12)),
+                                        dbc.Row([
+                                                dbc.Col([html.Header("Jan"),
+                                                                    html.Header('Receita'), 
+                                                                    html.Header('Despesa'),
+                                                                    html.Br(),
+                                                                    html.Header("Fev"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Mar"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Abr"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa")
+                                                                    ],style={'margin':'0px'}, lg=2), 
+                                                dbc.Col([html.Br(),
+                                                                    html.Header(f"R$ "), 
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ ")
+                                                                    ], lg=2),
+                                                dbc.Col([html.Header("Mai"),
+                                                                    html.Header('Receita'), 
+                                                                    html.Header('Despesa'),
+                                                                    html.Br(),
+                                                                    html.Header("Jun"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Jul"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Ago"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa")
+                                                                    ], lg=2), 
+                                                dbc.Col([html.Br(),
+                                                                    html.Header(f"R$ "), 
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ ")
+                                                                    ], lg=2),
+                                                dbc.Col([html.Header("Set"),
+                                                                    html.Header('Receita'), 
+                                                                    html.Header('Despesa'),
+                                                                    html.Br(),
+                                                                    html.Header("Out"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Nov"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Dez"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa")
+                                                                    ], lg=2), 
+                                                dbc.Col([html.Br(),
+                                                                    html.Header(f"R$ "), 
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    ], lg=2),
 
-                                           ])
-                                  ]))
-                         ])
-        return card
+                                            ])
+                                    ]))
+                            ])
+            return card
         
         
-    else:
-        card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6("Cashflow 2023'")), lg=12)), 
-                                  dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
-                                                                 html.Header('Juíz'),
-                                                                 html.Header('Goleiro'),
-                                                                 ]), lg=6), 
-                                           dbc.Col(dbc.CardBody([html.Header(f"R$ "), 
-                                                                 html.Header(f"R$ "),
-                                                                 html.Header(f"R$ "),
+        else:
+            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6("Cashflow 2023'")), lg=12)), 
+                                    dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
+                                                                    html.Header('Juíz'),
+                                                                    html.Header('Goleiro'),
+                                                                    ]), lg=6), 
+                                            dbc.Col(dbc.CardBody([html.Header(f"R$ "), 
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
 
-                                                                 ]), lg=6)])
-                                  ])
-                         ])
-        return card
+                                                                    ]), lg=6)])
+                                    ])
+                            ])
+            return card
+        
 
+    
+    
+    else:   
+        if parametro == 'Receitas por categoria':
+            df_resp = df_filter_incomes_months.loc[df_filter_incomes_months['COMPETÊNCIA']==mes]
+            
+            receita_mensalidade = df_resp[df_resp['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].values
+            receita_mensalidade = receita_mensalidade[0]
+            receita_diaristas = df_resp[df_resp['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].values
+            receita_diaristas = receita_diaristas[0]
+                
+            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Receitas por categoria')), lg=12)), 
+                                        dbc.Row([dbc.Col(dbc.CardBody([html.Header('Mensalistas'), 
+                                                                        html.Header('Diaristas')]), lg=6), 
+                                                dbc.Col(dbc.CardBody([html.Header(f"R$ {receita_mensalidade}"), 
+                                                                        html.Header(f"R$ {receita_diaristas}")]), lg=6)])
+                                        ])
+                                ])
+            return card
+            
+        elif parametro == 'Despesas por categoria':
+            df_resp_b = df_filter_expenses_months.loc[df_filter_expenses_months['COMPETÊNCIA']==mes]
+            
+            despesa_campo = df_resp_b[df_resp_b['CATEGORIA']=='Campo']['VALOR_DESPESA'].values
+            despesa_campo = despesa_campo[0]
+            despesa_juiz = df_resp_b[df_resp_b['CATEGORIA']=='Juíz']['VALOR_DESPESA'].values
+            despesa_juiz = despesa_juiz[0]
+            despesa_goleiro = df_resp_b[df_resp_b['CATEGORIA']=='Goleiro']['VALOR_DESPESA'].values
+            despesa_goleiro = despesa_goleiro[0]
 
+            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Despesas por categoria')), lg=12)), 
+                                        dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
+                                                                        html.Header('Juíz'),
+                                                                        html.Header('Goleiro'),
+                                                                        ]), lg=6), 
+                                                dbc.Col(dbc.CardBody([html.Header(f"R$ {despesa_campo}"), 
+                                                                        html.Header(f"R$ {despesa_juiz}"),
+                                                                        html.Header(f"R$ {despesa_goleiro}"),
+
+                                                                        ]), lg=6)])
+                                        ])
+                                ])
+            return card
+            
+        elif parametro == 'Fluxo caixa mes/mes':
+            card = dbc.Card([dbc.Row(dbc.CardBody([
+                                        dbc.Row(dbc.Col(html.H6("Balanço mensal"), lg=12)),
+                                        dbc.Row([
+                                                dbc.Col([html.Header("Jan"),
+                                                                    html.Header('Receita'), 
+                                                                    html.Header('Despesa'),
+                                                                    html.Br(),
+                                                                    html.Header("Fev"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Mar"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Abr"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa")
+                                                                    ],style={'margin':'0px'}, lg=2), 
+                                                dbc.Col([html.Br(),
+                                                                    html.Header(f"R$ "), 
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ ")
+                                                                    ], lg=2),
+                                                dbc.Col([html.Header("Mai"),
+                                                                    html.Header('Receita'), 
+                                                                    html.Header('Despesa'),
+                                                                    html.Br(),
+                                                                    html.Header("Jun"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Jul"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Ago"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa")
+                                                                    ], lg=2), 
+                                                dbc.Col([html.Br(),
+                                                                    html.Header(f"R$ "), 
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ ")
+                                                                    ], lg=2),
+                                                dbc.Col([html.Header("Set"),
+                                                                    html.Header('Receita'), 
+                                                                    html.Header('Despesa'),
+                                                                    html.Br(),
+                                                                    html.Header("Out"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Nov"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa"),
+                                                                    html.Br(),
+                                                                    html.Header("Dez"),
+                                                                    html.Header("Receita"),
+                                                                    html.Header("Despesa")
+                                                                    ], lg=2), 
+                                                dbc.Col([html.Br(),
+                                                                    html.Header(f"R$ "), 
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Br(),
+                                                                    html.Br(),
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+                                                                    ], lg=2),
+
+                                            ])
+                                    ]))
+                            ])
+            return card
+            
+            
+        else:
+            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6("Cashflow 2023'")), lg=12)), 
+                                    dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
+                                                                    html.Header('Juíz'),
+                                                                    html.Header('Goleiro'),
+                                                                    ]), lg=6), 
+                                            dbc.Col(dbc.CardBody([html.Header(f"R$ "), 
+                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R$ "),
+
+                                                                    ]), lg=6)])
+                                    ])
+                            ])
+            return card
+        
+        
 # Servidor
 if __name__=='__main__':
     app.run_server(debug=True)

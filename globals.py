@@ -36,6 +36,7 @@ df_year_cashflow = pd.merge(df_receitas_graph_01, df_despesas_graph_01, how='inn
 df_year_cashflow['CASH_FLOW'] = df_year_cashflow['VALOR_RECEITA']-df_year_cashflow['VALOR_DESPESA']
 df_year_cashflow['caixa'] = df_year_cashflow['CASH_FLOW'].cumsum()
 
+
 #dataframe analise receitas/despesas
 df_filter_incomes_detail = df_receitas.groupby('CATEGORIA').agg({'VALOR_RECEITA':'sum'})
 df_filter_incomes_detail = df_filter_incomes_detail.reset_index()
