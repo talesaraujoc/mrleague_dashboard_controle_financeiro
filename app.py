@@ -251,7 +251,9 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
     Input('disparador-geral-meses', 'value')
 )
 def update_texto(parametro, mes):
-        
+    
+    
+    
     if parametro == 'Receitas por categoria':
         receita_mensalidade = df_filter_incomes_months[df_filter_incomes_months['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].values
         receita_mensalidade = receita_mensalidade[0]

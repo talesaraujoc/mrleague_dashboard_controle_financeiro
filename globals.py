@@ -8,6 +8,10 @@ df_despesas = pd.read_excel('data/despesas_2023.xlsx')
 df_receitas.rename(columns={"VALOR": "VALOR_RECEITA"}, inplace=True)
 df_despesas.rename(columns={"VALOR":'VALOR_DESPESA'}, inplace=True)
 
+#segunda alteração dataset
+df_receitas['MES'] = df_receitas['DATA'].apply(lambda x: x.month)
+df_despesas['MES'] = df_despesas['DATA'].apply(lambda x: x.month)
+
 #lista_receitas
 lista_categorias_receitas = df_receitas['CATEGORIA'].unique()
 #lista_despesas
