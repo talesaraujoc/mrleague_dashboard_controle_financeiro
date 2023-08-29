@@ -292,6 +292,54 @@ def update_texto(parametro, mes):
             return card
         
         elif parametro == 'Fluxo caixa mes/mes':
+            jan = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Janeiro']
+            jan_receita = jan['VALOR_RECEITA'].sum()
+            jan_despesa = jan['VALOR_DESPESA'].sum()
+            
+            fev = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Feveiro']
+            fev_receita = fev['VALOR_RECEITA'].sum()
+            fev_despesa = fev['VALOR_DESPESA'].sum()
+            
+            mar = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Março']
+            mar_receita = mar['VALOR_RECEITA'].sum()
+            mar_despesa = mar['VALOR_DESPESA'].sum()
+            
+            abr = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Abril']
+            abr_receita = abr['VALOR_RECEITA'].sum()
+            abr_despesa = abr['VALOR_DESPESA'].sum()
+            
+            mai = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Maio']
+            mai_receita = mai['VALOR_RECEITA'].sum()
+            mai_despesa = mai['VALOR_DESPESA'].sum()
+            
+            jun = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Junho']
+            jun_receita = jun['VALOR_RECEITA'].sum()
+            jun_despesa = jun['VALOR_DESPESA'].sum()
+            
+            jul = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Julho']
+            jul_receita = jul['VALOR_RECEITA'].sum()
+            jul_despesa = jul['VALOR_DESPESA'].sum()
+            
+            ago = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Agosto']
+            ago_receita = ago['VALOR_RECEITA'].sum()
+            ago_despesa = ago['VALOR_DESPESA'].sum()
+            
+            set = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Setembro']
+            set_receita = set['VALOR_RECEITA'].sum()
+            set_despesa = set['VALOR_DESPESA'].sum()
+            
+            out = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Outubro']
+            out_receita = out['VALOR_RECEITA'].sum()
+            out_despesa = out['VALOR_DESPESA'].sum()
+            
+            nov = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Novembro']
+            nov_receita = nov['VALOR_RECEITA'].sum()
+            nov_despesa = nov['VALOR_DESPESA'].sum()
+            
+            dez = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Dezembro']
+            dez_receita = dez['VALOR_RECEITA'].sum()
+            dez_despesa = dez['VALOR_DESPESA'].sum()
+        
             card = dbc.Card([dbc.Row(dbc.CardBody([
                                         dbc.Row(dbc.Col(html.H6("Balanço mensal"), lg=12)),
                                         dbc.Row([
@@ -312,20 +360,20 @@ def update_texto(parametro, mes):
                                                                     html.Header("Despesa")
                                                                     ],style={'margin':'0px'}, lg=2), 
                                                 dbc.Col([html.Br(),
-                                                                    html.Header(f"R$ "), 
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${jan_receita}"), 
+                                                                    html.Header(f"R${jan_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${fev_receita}"),
+                                                                    html.Header(f"R${fev_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${mar_receita}"),
+                                                                    html.Header(f"R${mar_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ ")
+                                                                    html.Header(f"R${abr_receita}"),
+                                                                    html.Header(f"R${abr_despesa}")
                                                                     ], lg=2),
                                                 dbc.Col([html.Header("Mai"),
                                                                     html.Header('Receita'), 
@@ -344,20 +392,20 @@ def update_texto(parametro, mes):
                                                                     html.Header("Despesa")
                                                                     ], lg=2), 
                                                 dbc.Col([html.Br(),
-                                                                    html.Header(f"R$ "), 
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${mai_receita}"), 
+                                                                    html.Header(f"R${mai_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${jun_receita}"),
+                                                                    html.Header(f"R${jun_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${jul_receita}"),
+                                                                    html.Header(f"R${jul_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ ")
+                                                                    html.Header(f"R${ago_receita}"),
+                                                                    html.Header(f"R${ago_despesa}")
                                                                     ], lg=2),
                                                 dbc.Col([html.Header("Set"),
                                                                     html.Header('Receita'), 
@@ -376,20 +424,20 @@ def update_texto(parametro, mes):
                                                                     html.Header("Despesa")
                                                                     ], lg=2), 
                                                 dbc.Col([html.Br(),
-                                                                    html.Header(f"R$ "), 
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${set_receita}"), 
+                                                                    html.Header(f"R${set_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${out_receita}"),
+                                                                    html.Header(f"R${out_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${nov_receita}"),
+                                                                    html.Header(f"R${nov_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${dez_receita}"),
+                                                                    html.Header(f"R${dez_despesa}"),
                                                                     ], lg=2),
 
                                             ])
@@ -459,6 +507,54 @@ def update_texto(parametro, mes):
             return card
             
         elif parametro == 'Fluxo caixa mes/mes':
+            jan = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Janeiro']
+            jan_receita = jan['VALOR_RECEITA'].sum()
+            jan_despesa = jan['VALOR_DESPESA'].sum()
+            
+            fev = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Feveiro']
+            fev_receita = fev['VALOR_RECEITA'].sum()
+            fev_despesa = fev['VALOR_DESPESA'].sum()
+            
+            mar = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Março']
+            mar_receita = mar['VALOR_RECEITA'].sum()
+            mar_despesa = mar['VALOR_DESPESA'].sum()
+            
+            abr = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Abril']
+            abr_receita = abr['VALOR_RECEITA'].sum()
+            abr_despesa = abr['VALOR_DESPESA'].sum()
+            
+            mai = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Maio']
+            mai_receita = mai['VALOR_RECEITA'].sum()
+            mai_despesa = mai['VALOR_DESPESA'].sum()
+            
+            jun = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Junho']
+            jun_receita = jun['VALOR_RECEITA'].sum()
+            jun_despesa = jun['VALOR_DESPESA'].sum()
+            
+            jul = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Julho']
+            jul_receita = jul['VALOR_RECEITA'].sum()
+            jul_despesa = jul['VALOR_DESPESA'].sum()
+            
+            ago = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Agosto']
+            ago_receita = ago['VALOR_RECEITA'].sum()
+            ago_despesa = ago['VALOR_DESPESA'].sum()
+            
+            set = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Setembro']
+            set_receita = set['VALOR_RECEITA'].sum()
+            set_despesa = set['VALOR_DESPESA'].sum()
+            
+            out = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Outubro']
+            out_receita = out['VALOR_RECEITA'].sum()
+            out_despesa = out['VALOR_DESPESA'].sum()
+            
+            nov = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Novembro']
+            nov_receita = nov['VALOR_RECEITA'].sum()
+            nov_despesa = nov['VALOR_DESPESA'].sum()
+            
+            dez = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Dezembro']
+            dez_receita = dez['VALOR_RECEITA'].sum()
+            dez_despesa = dez['VALOR_DESPESA'].sum()
+        
             card = dbc.Card([dbc.Row(dbc.CardBody([
                                         dbc.Row(dbc.Col(html.H6("Balanço mensal"), lg=12)),
                                         dbc.Row([
@@ -479,20 +575,20 @@ def update_texto(parametro, mes):
                                                                     html.Header("Despesa")
                                                                     ],style={'margin':'0px'}, lg=2), 
                                                 dbc.Col([html.Br(),
-                                                                    html.Header(f"R$ "), 
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${jan_receita}"), 
+                                                                    html.Header(f"R${jan_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${fev_receita}"),
+                                                                    html.Header(f"R${fev_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${mar_receita}"),
+                                                                    html.Header(f"R${mar_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ ")
+                                                                    html.Header(f"R${abr_receita}"),
+                                                                    html.Header(f"R${abr_despesa}")
                                                                     ], lg=2),
                                                 dbc.Col([html.Header("Mai"),
                                                                     html.Header('Receita'), 
@@ -511,20 +607,20 @@ def update_texto(parametro, mes):
                                                                     html.Header("Despesa")
                                                                     ], lg=2), 
                                                 dbc.Col([html.Br(),
-                                                                    html.Header(f"R$ "), 
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${mai_receita}"), 
+                                                                    html.Header(f"R${mai_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${jun_receita}"),
+                                                                    html.Header(f"R${jun_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${jul_receita}"),
+                                                                    html.Header(f"R${jul_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ ")
+                                                                    html.Header(f"R${ago_receita}"),
+                                                                    html.Header(f"R${ago_despesa}")
                                                                     ], lg=2),
                                                 dbc.Col([html.Header("Set"),
                                                                     html.Header('Receita'), 
@@ -543,20 +639,20 @@ def update_texto(parametro, mes):
                                                                     html.Header("Despesa")
                                                                     ], lg=2), 
                                                 dbc.Col([html.Br(),
-                                                                    html.Header(f"R$ "), 
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${set_receita}"), 
+                                                                    html.Header(f"R${set_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${out_receita}"),
+                                                                    html.Header(f"R${out_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${nov_receita}"),
+                                                                    html.Header(f"R${nov_despesa}"),
                                                                     html.Br(),
                                                                     html.Br(),
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+                                                                    html.Header(f"R${dez_receita}"),
+                                                                    html.Header(f"R${dez_despesa}"),
                                                                     ], lg=2),
 
                                             ])
