@@ -447,17 +447,40 @@ def update_texto(parametro, mes):
         
         
         else:
-            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6("Cashflow 2023'")), lg=12)), 
-                                    dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
-                                                                    html.Header('Juíz'),
-                                                                    html.Header('Goleiro'),
-                                                                    ]), lg=6), 
-                                            dbc.Col(dbc.CardBody([html.Header(f"R$ "), 
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+            
+            card = dbc.Card([dbc.Row(dbc.CardBody([dbc.Row(dbc.Col(html.H6("Cashflow 2023'"), lg=12)), 
+                                    dbc.Row([dbc.Col(
+                                                    [ 
+                                                        html.Header('Janeiro'),
+                                                        html.Header('Fevereiro'),
+                                                        html.Header('Março'),
+                                                        html.Header('Abril'),
+                                                        html.Header('Maio'),
+                                                        html.Header('Junho'),
+                                                        html.Header('Julho'),
+                                                        html.Header('Agosto'),
+                                                        html.Header('Setembro'),
+                                                        html.Header('Outubro'),
+                                                        html.Header('Novembro'),
+                                                        html.Header('Dezembro'),
+                                                    ], lg=6), 
+                                            dbc.Col(
+                                                    [
+                                                        html.Header(f"R${janeiro_cashflow}"), 
+                                                        html.Header(f"R${fevereiro_cashflow}"),
+                                                        html.Header(f"R${marco_cashflow}"),
+                                                        html.Header(f"R${abril_cashflow}"),
+                                                        html.Header(f"R${maio_cashflow}"),
+                                                        html.Header(f"R${junho_cashflow}"),
+                                                        html.Header(f"R${julho_cashflow}"),
+                                                        html.Header(f"R${agosto_cashflow}"),
+                                                        html.Header(f"R${setembro_cashflow}"),
+                                                        html.Header(f"R${outubro_cashflow}"),
+                                                        html.Header(f"R${novembro_cashflow}"),
+                                                        html.Header(f"R${dezembro_cashflow}"),
 
-                                                                    ]), lg=6)])
-                                    ])
+                                                    ], lg=6)])
+                                    ]))
                             ])
             return card
         
@@ -662,17 +685,39 @@ def update_texto(parametro, mes):
             
             
         else:
-            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6("Cashflow 2023'")), lg=12)), 
-                                    dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
-                                                                    html.Header('Juíz'),
-                                                                    html.Header('Goleiro'),
-                                                                    ]), lg=6), 
-                                            dbc.Col(dbc.CardBody([html.Header(f"R$ "), 
-                                                                    html.Header(f"R$ "),
-                                                                    html.Header(f"R$ "),
+            card = dbc.Card([dbc.Row(dbc.CardBody([dbc.Row(dbc.Col(html.H6("Cashflow 2023'"), lg=12)), 
+                                    dbc.Row([dbc.Col(
+                                                    [ 
+                                                        html.Header('Janeiro'),
+                                                        html.Header('Fevereiro'),
+                                                        html.Header('Março'),
+                                                        html.Header('Abril'),
+                                                        html.Header('Maio'),
+                                                        html.Header('Junho'),
+                                                        html.Header('Julho'),
+                                                        html.Header('Agosto'),
+                                                        html.Header('Setembro'),
+                                                        html.Header('Outubro'),
+                                                        html.Header('Novembro'),
+                                                        html.Header('Dezembro'),
+                                                    ], lg=6), 
+                                            dbc.Col(
+                                                    [
+                                                        html.Header(f"R${janeiro_cashflow}"), 
+                                                        html.Header(f"R${fevereiro_cashflow}"),
+                                                        html.Header(f"R${marco_cashflow}"),
+                                                        html.Header(f"R${abril_cashflow}"),
+                                                        html.Header(f"R${maio_cashflow}"),
+                                                        html.Header(f"R${junho_cashflow}"),
+                                                        html.Header(f"R${julho_cashflow}"),
+                                                        html.Header(f"R${agosto_cashflow}"),
+                                                        html.Header(f"R${setembro_cashflow}"),
+                                                        html.Header(f"R${outubro_cashflow}"),
+                                                        html.Header(f"R${novembro_cashflow}"),
+                                                        html.Header(f"R${dezembro_cashflow}"),
 
-                                                                    ]), lg=6)])
-                                    ])
+                                                    ], lg=6)])
+                                    ]))
                             ])
             return card
         

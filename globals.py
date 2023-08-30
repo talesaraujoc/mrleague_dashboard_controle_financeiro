@@ -36,6 +36,19 @@ df_year_cashflow = pd.merge(df_receitas_graph_01, df_despesas_graph_01, how='inn
 df_year_cashflow['CASH_FLOW'] = df_year_cashflow['VALOR_RECEITA']-df_year_cashflow['VALOR_DESPESA']
 df_year_cashflow['caixa'] = df_year_cashflow['CASH_FLOW'].cumsum()
 
+janeiro_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Janeiro']['CASH_FLOW'].sum()
+fevereiro_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Fevereiro']['CASH_FLOW'].sum()
+marco_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Março']['CASH_FLOW'].sum()
+abril_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Abril']['CASH_FLOW'].sum()
+maio_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Maio']['CASH_FLOW'].sum()
+junho_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Junho']['CASH_FLOW'].sum()
+julho_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Julho']['CASH_FLOW'].sum()
+agosto_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Agosto']['CASH_FLOW'].sum()
+setembro_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Setembro']['CASH_FLOW'].sum()
+outubro_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Outubro']['CASH_FLOW'].sum()
+novembro_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Novembro']['CASH_FLOW'].sum()
+dezembro_cashflow = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Dezembro']['CASH_FLOW'].sum()
+            
 
 #dataframe analise receitas/despesas
 df_filter_incomes_detail = df_receitas.groupby('CATEGORIA').agg({'VALOR_RECEITA':'sum'})
