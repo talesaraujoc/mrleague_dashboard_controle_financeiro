@@ -53,6 +53,15 @@ card_resultado_mes= dbc.Card(
     style={}
 )
 
+card_saldo_att= dbc.Card(
+    dbc.CardBody(
+        [
+            html.H6("Saldo 23'", className="card-title"),
+            html.H4(f"R${df_year_cashflow['caixa'].iloc[-1]}")
+        ]
+    ),
+    style={}
+)
 
 fig_evolucao_caixa = go.Figure(go.Scatter(x=df_year_cashflow['COMPETÊNCIA'], y=df_year_cashflow['caixa']))
 fig_evolucao_caixa = fig_evolucao_caixa.update_layout(height=300)
@@ -65,14 +74,14 @@ nome_despesa = html.Header('Despesa: ')
 disparador = nome_receita
 # Layout ====================
 app.layout = html.Div([
-        dbc.Row(dcc.Dropdown(options=lista_meses, value=lista_meses[-1], id='disparador-geral-meses')),
+        dbc.Row(dcc.Dropdown(options=lista_meses, value=lista_meses[-1], id='disparador-geral-meses', clearable=False, style={"width": "200px", 'border-radius': '20px', 'textAlign': 'center'}), justify='center', style={'margin-top':'5px'}),
         
-        dbc.Row([dbc.Col([card_receita], lg=4), dbc.Col([card_despesa], lg=4), dbc.Col([card_resultado_mes], lg=4)]),
+        dbc.Row([dbc.Col([card_receita], lg=3), dbc.Col([card_despesa], lg=3), dbc.Col([card_resultado_mes], lg=3), dbc.Col(card_saldo_att, lg=3)], style={'margin-top':'10px'}),
         
         dbc.Row([
-                dbc.Col(dcc.Dropdown(options=lista_drop_esquerda, value=lista_drop_esquerda[0], id='dpd-01-r3/c1'), lg=6), 
+                dbc.Col(dcc.Dropdown(options=lista_drop_esquerda, value=lista_drop_esquerda[0], id='dpd-01-r3/c1', clearable=False, style={"width": "200px", 'textAlign': 'center'}), lg=6), 
                 dbc.Col([dcc.Dropdown(id='dpd-02-r3/c2')], lg=6)
-                ]),
+                ], style={'margin-top':'10px'}),
         
         dbc.Row([dbc.Col([dcc.Graph(id='grafico-01-r4/c1', config={"displayModeBar": False, "showTips": False})], lg=7), dbc.Col(
                                                                                                                                 [
