@@ -26,41 +26,41 @@ update_grafico = {'margin': {'l':0, 'r':0, 't': 10, 'b':0}}
 card_receita = dbc.Card(
     dbc.CardBody(
         [
-            html.H6("Receitas", className="card-title"),
+            html.H6("Receitas", style={'color':'green'}),
             html.H4(id='receita-valor')
-        ]
+        ], style={'padding-top':'8px', 'padding-bottom':'10px'}
     ),
-    style={}
+    style={'width':'72%'}
 )
 
 card_despesa= dbc.Card(
     dbc.CardBody(
         [
-            html.H6("Despesas", className="card-title"),
+            html.H6("Despesas", style={'color':'red'}),
             html.H4(id='despesa-valor')
-        ]
+        ], style={'padding-top':'8px', 'padding-bottom':'10px'}
     ),
-    style={}
+    style={'width':'72%'}
 )
 
 card_resultado_mes= dbc.Card(
     dbc.CardBody(
         [
-            html.H6("Balanço (=)", className="card-title"),
+            html.H6("Balanço (=)", style={'color':'purple'}),
             html.H4(id='balanco-valor')
-        ]
+        ], style={'padding-top':'8px', 'padding-bottom':'10px'}
     ),
-    style={}
+    style={'width':'72%'}
 )
 
 card_saldo_att= dbc.Card(
     dbc.CardBody(
         [
-            html.H6("Saldo 23'", className="card-title"),
+            html.H6("Saldo 23'", style={'color':'blue'}),
             html.H4(f"R${df_year_cashflow['caixa'].iloc[-1]}")
-        ]
+        ], style={'padding-top':'8px', 'padding-bottom':'10px'}
     ),
-    style={}
+    style={'width':'72%'}
 )
 
 fig_evolucao_caixa = go.Figure(go.Scatter(x=df_year_cashflow['COMPETÊNCIA'], y=df_year_cashflow['caixa']))
@@ -76,20 +76,33 @@ disparador = nome_receita
 app.layout = html.Div([
         dbc.Row(dcc.Dropdown(options=lista_meses, value=lista_meses[-1], id='disparador-geral-meses', clearable=False, style={"width": "200px", 'border-radius': '20px', 'textAlign': 'center'}), justify='center', style={'margin-top':'5px'}),
         
-        dbc.Row([dbc.Col([card_receita], lg=3), dbc.Col([card_despesa], lg=3), dbc.Col([card_resultado_mes], lg=3), dbc.Col(card_saldo_att, lg=3)], style={'margin-top':'10px'}),
+        dbc.Row([
+                dbc.Col(dbc.Row([card_receita], justify='center'), lg=3), 
+                dbc.Col(dbc.Row([card_despesa], justify='center'), lg=3), 
+                dbc.Col(dbc.Row([card_resultado_mes], justify='center'), lg=3), 
+                dbc.Col(dbc.Row(card_saldo_att, justify='center'), lg=3)
+                ], 
+                style={'margin-top':'20px'}, justify='center'),
         
         dbc.Row([
-                dbc.Col(dcc.Dropdown(options=lista_drop_esquerda, value=lista_drop_esquerda[0], id='dpd-01-r3/c1', clearable=False, style={"width": "200px", 'textAlign': 'center'}), lg=6), 
-                dbc.Col([dcc.Dropdown(id='dpd-02-r3/c2')], lg=6)
-                ], style={'margin-top':'10px'}),
+                dbc.Col(dcc.Dropdown(options=lista_drop_esquerda, value=lista_drop_esquerda[0], id='dpd-01-r3/c1', clearable=False, style={"width": "250px", 'textAlign': 'center'}), lg=7), 
+                dbc.Col(dcc.Dropdown(id='dpd-02-r3/c2', clearable=False, style={"width": "250px", 'textAlign': 'center'}), lg=5)
+                ], 
+                style={'margin-top':'10px', 'margin-left':'5px', 'margin_right':'5px', 'padding':'0px'}),
         
-        dbc.Row([dbc.Col([dcc.Graph(id='grafico-01-r4/c1', config={"displayModeBar": False, "showTips": False})], lg=7), dbc.Col(
-                                                                                                                                [
-                                                                                                                                html.Div(id='disparador_texto')
-                                                                                                                                    ], 
-                                                                                                                                 lg=5)]),
+        dbc.Row([
+                dbc.Col([dcc.Graph(id='grafico-01-r4/c1', config={"displayModeBar": False, "showTips": False})], lg=7), 
+                dbc.Col([
+                        html.Div(id='disparador_texto')
+                            ],lg=5)
+                ], 
+                style={'margin-top':'10px', 'margin-left':'5px', 'margin_right':'5px', 'padding':'0px'}),
         
-        dbc.Row([dbc.Col([html.H5('Evolução Caixa'), dcc.Graph(figure=fig_evolucao_caixa, config={"displayModeBar": False, "showTips": False})], lg=6), dbc.Col([html.H5('Check | Mensalidades')], lg=6)])
+        dbc.Row([
+                dbc.Col([html.H5('Evolução Caixa'), dcc.Graph(figure=fig_evolucao_caixa, config={"displayModeBar": False, "showTips": False})], lg=6), 
+                dbc.Col([html.H5('Check | Mensalidades')], lg=6)
+                ],
+                style={'margin-top':'10px', 'margin-left':'5px', 'margin_right':'5px', 'padding':'0px'})
 ])
 
 
@@ -269,11 +282,20 @@ def update_texto(parametro, mes):
             receita_diaristas = df_filter_incomes_detail[df_filter_incomes_detail['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].values
             receita_diaristas = receita_diaristas[0]
                 
-            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Receitas por categoria')), lg=12)), 
-                                        dbc.Row([dbc.Col(dbc.CardBody([html.Header('Mensalistas'), 
-                                                                        html.Header('Diaristas')]), lg=6), 
-                                                dbc.Col(dbc.CardBody([html.Header(f"R$ {receita_mensalidade}"), 
-                                                                        html.Header(f"R$ {receita_diaristas}")]), lg=6)])
+            card = dbc.Card([dbc.Row([
+                                        dbc.Row(html.H6('Receitas por categoria', style={'margin-top':'3px'}), justify='center'), 
+                                        dbc.Row([
+                                                dbc.Col(dbc.CardBody([
+                                                                        html.Header('Mensalistas'), 
+                                                                        html.Header('Diaristas')
+                                                                        ]), lg=3), 
+                                                dbc.Col(dbc.CardBody([
+                                                                    html.Header(f"R$ {receita_mensalidade}"), 
+                                                                    html.Header(f"R$ {receita_diaristas}")
+                                                                    ]), lg=2),
+                                                dbc.Col([html.Div()], lg=3),
+                                                dbc.Col([html.Div()], lg=4)
+                                                ])
                                         ])
                                 ])
             return card
