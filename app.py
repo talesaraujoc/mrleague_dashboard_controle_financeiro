@@ -283,21 +283,21 @@ def update_texto(parametro, mes):
             receita_diaristas = receita_diaristas[0]
                 
             card = dbc.Card([dbc.Row([
-                                        dbc.Row(html.H6('Receitas por categoria', style={'margin-top':'3px'}), justify='center'), 
+                                        dbc.Row(html.H6('Receitas por categoria', style={'margin-top':'10px', 'margin-left':'30px'}), justify='center'), 
                                         dbc.Row([
                                                 dbc.Col(dbc.CardBody([
                                                                         html.Header('Mensalistas'), 
                                                                         html.Header('Diaristas')
-                                                                        ]), lg=3), 
+                                                                        ], style={'padding-top':'0px'}), lg=3), 
                                                 dbc.Col(dbc.CardBody([
                                                                     html.Header(f"R$ {receita_mensalidade}"), 
                                                                     html.Header(f"R$ {receita_diaristas}")
-                                                                    ]), lg=2),
+                                                                    ], style={'padding-top':'0px'}), lg=2),
                                                 dbc.Col([html.Div()], lg=3),
                                                 dbc.Col([html.Div()], lg=4)
-                                                ])
+                                                ], style={'margin-top':'10px'})
                                         ])
-                                ])
+                                ], style={'height':'420px'})
             return card
         
         elif parametro == 'Despesas por categoria':
@@ -308,18 +308,22 @@ def update_texto(parametro, mes):
             despesa_goleiro = df_filter_expenses_detail[df_filter_expenses_detail['CATEGORIA']=='Goleiro']['VALOR_DESPESA'].values
             despesa_goleiro = despesa_goleiro[0]
 
-            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Despesas por categoria')), lg=12)), 
-                                        dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
+            card = dbc.Card([dbc.Row([
+                                        dbc.Row(html.H6('Despesas por categoria', style={'margin-top':'10px', 'margin-left':'30px'}), justify='center'), 
+                                        dbc.Row([
+                                                dbc.Col(dbc.CardBody([
+                                                                        html.Header('Campo'), 
                                                                         html.Header('Juíz'),
                                                                         html.Header('Goleiro'),
-                                                                        ]), lg=6), 
-                                                dbc.Col(dbc.CardBody([html.Header(f"R$ {despesa_campo}"), 
+                                                                        ], style={'padding-top':'0px'}), lg=6), 
+                                                dbc.Col(dbc.CardBody([
+                                                                        html.Header(f"R$ {despesa_campo}"), 
                                                                         html.Header(f"R$ {despesa_juiz}"),
-                                                                        html.Header(f"R$ {despesa_goleiro}"),
-
-                                                                        ]), lg=6)])
+                                                                        html.Header(f"R$ {despesa_goleiro}")
+                                                                        ], style={'padding-top':'0px'}), lg=6)
+                                                ], style={'margin-top':'10px'})
                                         ])
-                                ])
+                                ], style={'height':'420px'})
             return card
         
         elif parametro == 'Fluxo caixa mes/mes':
@@ -371,8 +375,8 @@ def update_texto(parametro, mes):
             dez_receita = dez['VALOR_RECEITA'].sum()
             dez_despesa = dez['VALOR_DESPESA'].sum()
         
-            card = dbc.Card([dbc.Row(dbc.CardBody([
-                                        dbc.Row(dbc.Col(html.H6("Balanço mensal"), lg=12)),
+            card = dbc.Card([dbc.Row([
+                                        dbc.Row(html.H6("Balanço mensal", style={'margin-top':'10px', 'margin-left':'30px'})),
                                         dbc.Row([
                                                 dbc.Col([html.Header("Jan"),
                                                                     html.Header('Receita'), 
@@ -389,7 +393,7 @@ def update_texto(parametro, mes):
                                                                     html.Header("Abr"),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa")
-                                                                    ],style={'margin':'0px'}, lg=2), 
+                                                                    ], lg=2), 
                                                 dbc.Col([html.Br(),
                                                                     html.Header(f"R${jan_receita}"), 
                                                                     html.Header(f"R${jan_despesa}"),
@@ -472,16 +476,21 @@ def update_texto(parametro, mes):
                                                                     ], lg=2),
 
                                             ])
-                                    ]))
+                                    ])
                             ])
             return card
         
         
         else:
             
-            card = dbc.Card([dbc.Row(dbc.CardBody([dbc.Row(dbc.Col(html.H6("Cashflow 2023'"), lg=12)), 
-                                    dbc.Row([dbc.Col(
-                                                    [ 
+            card = dbc.Card([
+                                dbc.Row(
+                                            [
+                                            dbc.Row(html.H6("Cashflow 2023'", style={'margin-top':'10px', 'margin-left':'30px'})), 
+                                            dbc.Row(
+                                                [
+                                                dbc.Col(dbc.CardBody(
+                                                        [ 
                                                         html.Header('Janeiro'),
                                                         html.Header('Fevereiro'),
                                                         html.Header('Março'),
@@ -494,9 +503,9 @@ def update_texto(parametro, mes):
                                                         html.Header('Outubro'),
                                                         html.Header('Novembro'),
                                                         html.Header('Dezembro'),
-                                                    ], lg=6), 
-                                            dbc.Col(
-                                                    [
+                                                        ], style={'padding-top':'0px'}), lg=3), 
+                                                dbc.Col(dbc.CardBody(
+                                                        [
                                                         html.Header(f"R${janeiro_cashflow}"), 
                                                         html.Header(f"R${fevereiro_cashflow}"),
                                                         html.Header(f"R${marco_cashflow}"),
@@ -509,10 +518,13 @@ def update_texto(parametro, mes):
                                                         html.Header(f"R${outubro_cashflow}"),
                                                         html.Header(f"R${novembro_cashflow}"),
                                                         html.Header(f"R${dezembro_cashflow}"),
-
-                                                    ], lg=6)])
-                                    ]))
-                            ])
+                                                        ], style={'padding-top':'0px'}), lg=2),
+                                                dbc.Col([html.Div()], lg=3),
+                                                dbc.Col([html.Div()], lg=4)
+                                                ], style={'margin-top':'10px'})
+                                            ]
+                                    )
+                            ], style={'height':'420px'})
             return card
         
 
@@ -527,13 +539,22 @@ def update_texto(parametro, mes):
             receita_diaristas = df_resp[df_resp['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].values
             receita_diaristas = receita_diaristas[0]
                 
-            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Receitas por categoria')), lg=12)), 
-                                        dbc.Row([dbc.Col(dbc.CardBody([html.Header('Mensalistas'), 
-                                                                        html.Header('Diaristas')]), lg=6), 
-                                                dbc.Col(dbc.CardBody([html.Header(f"R$ {receita_mensalidade}"), 
-                                                                        html.Header(f"R$ {receita_diaristas}")]), lg=6)])
+            card = dbc.Card([dbc.Row([
+                                        dbc.Row(html.H6('Receitas por categoria', style={'margin-top':'10px', 'margin-left':'30px'}), justify='center'), 
+                                        dbc.Row([
+                                                dbc.Col(dbc.CardBody([
+                                                                        html.Header('Mensalistas'), 
+                                                                        html.Header('Diaristas')
+                                                                        ], style={'padding-top':'0px'}), lg=3), 
+                                                dbc.Col(dbc.CardBody([
+                                                                    html.Header(f"R$ {receita_mensalidade}"), 
+                                                                    html.Header(f"R$ {receita_diaristas}")
+                                                                    ], style={'padding-top':'0px'}), lg=2),
+                                                dbc.Col([html.Div()], lg=3),
+                                                dbc.Col([html.Div()], lg=4)
+                                                ], style={'margin-top':'10px'})
                                         ])
-                                ])
+                                ], style={'height':'420px'})
             return card
             
         elif parametro == 'Despesas por categoria':
@@ -546,18 +567,22 @@ def update_texto(parametro, mes):
             despesa_goleiro = df_resp_b[df_resp_b['CATEGORIA']=='Goleiro']['VALOR_DESPESA'].values
             despesa_goleiro = despesa_goleiro[0]
 
-            card = dbc.Card([dbc.Row([dbc.Row(dbc.Col(dbc.CardBody(html.H6('Despesas por categoria')), lg=12)), 
-                                        dbc.Row([dbc.Col(dbc.CardBody([html.Header('Campo'), 
+            card = dbc.Card([dbc.Row([
+                                        dbc.Row(html.H6('Despesas por categoria', style={'margin-top':'10px', 'margin-left':'30px'}), justify='center'), 
+                                        dbc.Row([
+                                                dbc.Col(dbc.CardBody([
+                                                                        html.Header('Campo'), 
                                                                         html.Header('Juíz'),
                                                                         html.Header('Goleiro'),
-                                                                        ]), lg=6), 
-                                                dbc.Col(dbc.CardBody([html.Header(f"R$ {despesa_campo}"), 
+                                                                        ], style={'padding-top':'0px'}), lg=6), 
+                                                dbc.Col(dbc.CardBody([
+                                                                        html.Header(f"R$ {despesa_campo}"), 
                                                                         html.Header(f"R$ {despesa_juiz}"),
-                                                                        html.Header(f"R$ {despesa_goleiro}"),
-
-                                                                        ]), lg=6)])
+                                                                        html.Header(f"R$ {despesa_goleiro}")
+                                                                        ], style={'padding-top':'0px'}), lg=6)
+                                                ], style={'margin-top':'10px'})
                                         ])
-                                ])
+                                ], style={'height':'420px'})
             return card
             
         elif parametro == 'Fluxo caixa mes/mes':
@@ -609,8 +634,8 @@ def update_texto(parametro, mes):
             dez_receita = dez['VALOR_RECEITA'].sum()
             dez_despesa = dez['VALOR_DESPESA'].sum()
         
-            card = dbc.Card([dbc.Row(dbc.CardBody([
-                                        dbc.Row(dbc.Col(html.H6("Balanço mensal"), lg=12)),
+            card = dbc.Card([dbc.Row([
+                                        dbc.Row(html.H6("Balanço mensal", style={'margin-top':'10px', 'margin-left':'30px'})),
                                         dbc.Row([
                                                 dbc.Col([html.Header("Jan"),
                                                                     html.Header('Receita'), 
@@ -627,7 +652,7 @@ def update_texto(parametro, mes):
                                                                     html.Header("Abr"),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa")
-                                                                    ],style={'margin':'0px'}, lg=2), 
+                                                                    ], lg=2), 
                                                 dbc.Col([html.Br(),
                                                                     html.Header(f"R${jan_receita}"), 
                                                                     html.Header(f"R${jan_despesa}"),
@@ -710,15 +735,20 @@ def update_texto(parametro, mes):
                                                                     ], lg=2),
 
                                             ])
-                                    ]))
+                                    ])
                             ])
             return card
             
             
         else:
-            card = dbc.Card([dbc.Row(dbc.CardBody([dbc.Row(dbc.Col(html.H6("Cashflow 2023'"), lg=12)), 
-                                    dbc.Row([dbc.Col(
-                                                    [ 
+            card = dbc.Card([
+                                dbc.Row(
+                                            [
+                                            dbc.Row(html.H6("Cashflow 2023'", style={'margin-top':'10px', 'margin-left':'30px'})), 
+                                            dbc.Row(
+                                                [
+                                                dbc.Col(dbc.CardBody(
+                                                        [ 
                                                         html.Header('Janeiro'),
                                                         html.Header('Fevereiro'),
                                                         html.Header('Março'),
@@ -731,9 +761,9 @@ def update_texto(parametro, mes):
                                                         html.Header('Outubro'),
                                                         html.Header('Novembro'),
                                                         html.Header('Dezembro'),
-                                                    ], lg=6), 
-                                            dbc.Col(
-                                                    [
+                                                        ], style={'padding-top':'0px'}), lg=3), 
+                                                dbc.Col(dbc.CardBody(
+                                                        [
                                                         html.Header(f"R${janeiro_cashflow}"), 
                                                         html.Header(f"R${fevereiro_cashflow}"),
                                                         html.Header(f"R${marco_cashflow}"),
@@ -746,10 +776,13 @@ def update_texto(parametro, mes):
                                                         html.Header(f"R${outubro_cashflow}"),
                                                         html.Header(f"R${novembro_cashflow}"),
                                                         html.Header(f"R${dezembro_cashflow}"),
-
-                                                    ], lg=6)])
-                                    ]))
-                            ])
+                                                        ], style={'padding-top':'0px'}), lg=2),
+                                                dbc.Col([html.Div()], lg=3),
+                                                dbc.Col([html.Div()], lg=4)
+                                                ], style={'margin-top':'10px'})
+                                            ]
+                                    )
+                            ], style={'height':'420px'})
             return card
         
         
