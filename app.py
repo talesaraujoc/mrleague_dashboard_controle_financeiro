@@ -53,11 +53,12 @@ card_resultado_mes= dbc.Card(
     style={'width':'72%'}
 )
 
+saldo_att_number = 4315.58 + (df_year_cashflow['caixa'].iloc[-1])
 card_saldo_att= dbc.Card(
     dbc.CardBody(
         [
-            html.H6("Saldo 23'", style={'color':'blue'}),
-            html.H4(f"R${df_year_cashflow['caixa'].iloc[-1]}")
+            html.H6("Saldo 23'  (22' R$4.315)", style={'color':'blue'}),
+            html.H4(f"R${saldo_att_number}")
         ], style={'padding-top':'8px', 'padding-bottom':'10px'}
     ),
     style={'width':'72%'}
