@@ -280,10 +280,10 @@ def update_texto(parametro, mes):
     
     if mes == 'Ano':
         if parametro == 'Receitas por categoria':
-            receita_mensalidade = df_filter_incomes_detail[df_filter_incomes_detail['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].values
-            receita_mensalidade = receita_mensalidade[0]
-            receita_diaristas = df_filter_incomes_detail[df_filter_incomes_detail['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].values
-            receita_diaristas = receita_diaristas[0]
+            receita_mensalidade = df_filter_incomes_detail[df_filter_incomes_detail['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].sum()
+            
+            receita_diaristas = df_filter_incomes_detail[df_filter_incomes_detail['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].sum()
+            
                 
             card = dbc.Card([dbc.Row([
                                         dbc.Row(html.H6('Receitas por categoria', style={'margin-top':'10px', 'margin-left':'30px'}), justify='center'), 
@@ -304,12 +304,12 @@ def update_texto(parametro, mes):
             return card
         
         elif parametro == 'Despesas por categoria':
-            despesa_campo = df_filter_expenses_detail[df_filter_expenses_detail['CATEGORIA']=='Campo']['VALOR_DESPESA'].values
-            despesa_campo = despesa_campo[0]
-            despesa_juiz = df_filter_expenses_detail[df_filter_expenses_detail['CATEGORIA']=='Juíz']['VALOR_DESPESA'].values
-            despesa_juiz = despesa_juiz[0]
-            despesa_goleiro = df_filter_expenses_detail[df_filter_expenses_detail['CATEGORIA']=='Goleiro']['VALOR_DESPESA'].values
-            despesa_goleiro = despesa_goleiro[0]
+            despesa_campo = df_filter_expenses_detail[df_filter_expenses_detail['CATEGORIA']=='Campo']['VALOR_DESPESA'].sum()
+            
+            despesa_juiz = df_filter_expenses_detail[df_filter_expenses_detail['CATEGORIA']=='Juíz']['VALOR_DESPESA'].sum()
+            
+            despesa_goleiro = df_filter_expenses_detail[df_filter_expenses_detail['CATEGORIA']=='Goleiro']['VALOR_DESPESA'].sum()
+            
 
             card = dbc.Card([dbc.Row([
                                         dbc.Row(html.H6('Despesas por categoria', style={'margin-top':'10px', 'margin-left':'30px'}), justify='center'), 
@@ -539,10 +539,10 @@ def update_texto(parametro, mes):
         if parametro == 'Receitas por categoria':
             df_resp = df_filter_incomes_months.loc[df_filter_incomes_months['COMPETÊNCIA']==mes]
             
-            receita_mensalidade = df_resp[df_resp['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].values
-            receita_mensalidade = receita_mensalidade[0]
-            receita_diaristas = df_resp[df_resp['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].values
-            receita_diaristas = receita_diaristas[0]
+            receita_mensalidade = df_resp[df_resp['CATEGORIA']=='MENSALIDADE']['VALOR_RECEITA'].sum()
+            
+            receita_diaristas = df_resp[df_resp['CATEGORIA']=='DIARISTAS']['VALOR_RECEITA'].sum()
+            
                 
             card = dbc.Card([dbc.Row([
                                         dbc.Row(html.H6('Receitas por categoria', style={'margin-top':'10px', 'margin-left':'30px'}), justify='center'), 
@@ -565,12 +565,12 @@ def update_texto(parametro, mes):
         elif parametro == 'Despesas por categoria':
             df_resp_b = df_filter_expenses_months.loc[df_filter_expenses_months['COMPETÊNCIA']==mes]
             
-            despesa_campo = df_resp_b[df_resp_b['CATEGORIA']=='Campo']['VALOR_DESPESA'].values
-            despesa_campo = despesa_campo[0]
-            despesa_juiz = df_resp_b[df_resp_b['CATEGORIA']=='Juíz']['VALOR_DESPESA'].values
-            despesa_juiz = despesa_juiz[0]
-            despesa_goleiro = df_resp_b[df_resp_b['CATEGORIA']=='Goleiro']['VALOR_DESPESA'].values
-            despesa_goleiro = despesa_goleiro[0]
+            despesa_campo = df_resp_b[df_resp_b['CATEGORIA']=='Campo']['VALOR_DESPESA'].sum()
+            
+            despesa_juiz = df_resp_b[df_resp_b['CATEGORIA']=='Juíz']['VALOR_DESPESA'].sum()
+            
+            despesa_goleiro = df_resp_b[df_resp_b['CATEGORIA']=='Goleiro']['VALOR_DESPESA'].sum()
+            
 
             card = dbc.Card([dbc.Row([
                                         dbc.Row(html.H6('Despesas por categoria', style={'margin-top':'10px', 'margin-left':'30px'}), justify='center'), 
@@ -824,4 +824,4 @@ def update_table(mes):
 
 # Servidor
 if __name__=='__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
