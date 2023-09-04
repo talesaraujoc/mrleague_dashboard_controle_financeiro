@@ -57,7 +57,7 @@ saldo_att_number = 4315.58 + (df_year_cashflow['caixa'].iloc[-1])
 card_saldo_att= dbc.Card(
     dbc.CardBody(
         [
-            html.H6("Saldo 23'  (22' R$4.315)", style={'color':'blue'}),
+            html.H6("Saldo 23'  + 22' (R$4.315)", style={'color':'blue'}),
             html.H4(f"R${saldo_att_number}")
         ], style={'padding-top':'8px', 'padding-bottom':'10px'}
     ),
@@ -234,20 +234,21 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
         df_despesas_target_beta = df_filter_expenses_months.loc[df_filter_expenses_months['COMPETÊNCIA']==parametro_superior]
         
         if parametro_esq == 'Análise':
-            if parametro_dir == 'Despesas por Categoria':
-                fig = go.Figure(data=go.Pie(labels=df_despesas_target_beta['CATEGORIA'], values=df_despesas_target_beta['VALOR_DESPESA'], hole=0.6))
+            if parametro_dir == 'Despesas por categoria':
+                fig_x = go.Figure(data=go.Pie(labels=df_despesas_target_beta['CATEGORIA'], values=df_despesas_target_beta['VALOR_DESPESA'], hole=0.6))
                 
-                fig.update_layout(height=350)
-                fig.update_layout(update_grafico)
                 
-                return fig
+                fig_x.update_layout(height=350)
+                fig_x.update_layout(update_grafico)
+                
+                return fig_x
             else:
-                fig = go.Figure(data=go.Pie(labels=df_receitas_target_beta['CATEGORIA'], values=df_receitas_target_beta['VALOR_RECEITA'], hole=0.6))
+                fig_k = go.Figure(data=go.Pie(labels=df_receitas_target_beta['CATEGORIA'], values=df_receitas_target_beta['VALOR_RECEITA'], hole=0.6))
                 
-                fig.update_layout(height=350)
-                fig.update_layout(update_grafico)
+                fig_k.update_layout(height=350)
+                fig_k.update_layout(update_grafico)
                 
-                return fig
+                return fig_k
         else:
             if parametro_dir == 'Fluxo caixa mes/mes':
 
@@ -316,12 +317,14 @@ def update_texto(parametro, mes):
                                                                         html.Header('Campo'), 
                                                                         html.Header('Juíz'),
                                                                         html.Header('Goleiro'),
-                                                                        ], style={'padding-top':'0px'}), lg=6), 
+                                                                        ], style={'padding-top':'0px'}), lg=3), 
                                                 dbc.Col(dbc.CardBody([
                                                                         html.Header(f"R$ {despesa_campo}"), 
                                                                         html.Header(f"R$ {despesa_juiz}"),
                                                                         html.Header(f"R$ {despesa_goleiro}")
-                                                                        ], style={'padding-top':'0px'}), lg=6)
+                                                                        ], style={'padding-top':'0px'}), lg=2),
+                                                dbc.Col([html.Div()], lg=3),
+                                                dbc.Col([html.Div()], lg=4)
                                                 ], style={'margin-top':'10px'})
                                         ])
                                 ], style={'height':'420px'})
@@ -575,12 +578,14 @@ def update_texto(parametro, mes):
                                                                         html.Header('Campo'), 
                                                                         html.Header('Juíz'),
                                                                         html.Header('Goleiro'),
-                                                                        ], style={'padding-top':'0px'}), lg=6), 
+                                                                        ], style={'padding-top':'0px'}), lg=3), 
                                                 dbc.Col(dbc.CardBody([
                                                                         html.Header(f"R$ {despesa_campo}"), 
                                                                         html.Header(f"R$ {despesa_juiz}"),
                                                                         html.Header(f"R$ {despesa_goleiro}")
-                                                                        ], style={'padding-top':'0px'}), lg=6)
+                                                                        ], style={'padding-top':'0px'}), lg=2),
+                                                dbc.Col([html.Div()], lg=3),
+                                                dbc.Col([html.Div()], lg=4)
                                                 ], style={'margin-top':'10px'})
                                         ])
                                 ], style={'height':'420px'})
