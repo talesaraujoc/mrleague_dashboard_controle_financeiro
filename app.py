@@ -1,4 +1,4 @@
-from dash import dash, html, dcc, ctx, Output, Input, dash_table
+from dash import dash, html, dcc, Output, Input
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
 
@@ -46,7 +46,7 @@ card_despesa= dbc.Card(
 card_resultado_mes= dbc.Card(
     dbc.CardBody(
         [
-            html.H6("Balanço (=)", style={'color':'purple'}),
+            html.H6("Balanço (=)", style={'color':'#6CB2F6'}),
             html.H4(id='balanco-valor')
         ], style={'padding-top':'8px', 'padding-bottom':'10px'}
     ),
@@ -383,19 +383,19 @@ def update_texto(parametro, mes):
             card = dbc.Card([dbc.Row([
                                         dbc.Row(html.H6("Balanço mensal", style={'margin-top':'10px', 'margin-left':'30px'})),
                                         dbc.Row([
-                                                dbc.Col([html.Header("Jan"),
+                                                dbc.Col([html.Header("Jan", style={'color':'#A039F6'}),
                                                                     html.Header('Receita'), 
                                                                     html.Header('Despesa'),
                                                                     html.Br(),
-                                                                    html.Header("Fev"),
+                                                                    html.Header("Fev", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Mar"),
+                                                                    html.Header("Mar", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Abr"),
+                                                                    html.Header("Abr", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa")
                                                                     ], lg=2), 
@@ -415,19 +415,19 @@ def update_texto(parametro, mes):
                                                                     html.Header(f"R${abr_receita}"),
                                                                     html.Header(f"R${abr_despesa}")
                                                                     ], lg=2),
-                                                dbc.Col([html.Header("Mai"),
+                                                dbc.Col([html.Header("Mai", style={'color':'#A039F6'}),
                                                                     html.Header('Receita'), 
                                                                     html.Header('Despesa'),
                                                                     html.Br(),
-                                                                    html.Header("Jun"),
+                                                                    html.Header("Jun", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Jul"),
+                                                                    html.Header("Jul", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Ago"),
+                                                                    html.Header("Ago", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa")
                                                                     ], lg=2), 
@@ -447,19 +447,19 @@ def update_texto(parametro, mes):
                                                                     html.Header(f"R${ago_receita}"),
                                                                     html.Header(f"R${ago_despesa}")
                                                                     ], lg=2),
-                                                dbc.Col([html.Header("Set"),
+                                                dbc.Col([html.Header("Set", style={'color':'#A039F6'}),
                                                                     html.Header('Receita'), 
                                                                     html.Header('Despesa'),
                                                                     html.Br(),
-                                                                    html.Header("Out"),
+                                                                    html.Header("Out", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Nov"),
+                                                                    html.Header("Nov", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Dez"),
+                                                                    html.Header("Dez", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa")
                                                                     ], lg=2), 
@@ -496,18 +496,18 @@ def update_texto(parametro, mes):
                                                 [
                                                 dbc.Col(dbc.CardBody(
                                                         [ 
-                                                        html.Header('Janeiro'),
-                                                        html.Header('Fevereiro'),
-                                                        html.Header('Março'),
-                                                        html.Header('Abril'),
-                                                        html.Header('Maio'),
-                                                        html.Header('Junho'),
-                                                        html.Header('Julho'),
-                                                        html.Header('Agosto'),
-                                                        html.Header('Setembro'),
-                                                        html.Header('Outubro'),
-                                                        html.Header('Novembro'),
-                                                        html.Header('Dezembro'),
+                                                        html.Header('Janeiro', style={'color':'#A039F6'}),
+                                                        html.Header('Fevereiro', style={'color':'#A039F6'}),
+                                                        html.Header('Março', style={'color':'#A039F6'}),
+                                                        html.Header('Abril', style={'color':'#A039F6'}),
+                                                        html.Header('Maio', style={'color':'#A039F6'}),
+                                                        html.Header('Junho', style={'color':'#A039F6'}),
+                                                        html.Header('Julho', style={'color':'#A039F6'}),
+                                                        html.Header('Agosto', style={'color':'#A039F6'}),
+                                                        html.Header('Setembro', style={'color':'#A039F6'}),
+                                                        html.Header('Outubro', style={'color':'#A039F6'}),
+                                                        html.Header('Novembro', style={'color':'#A039F6'}),
+                                                        html.Header('Dezembro', style={'color':'#A039F6'}),
                                                         ], style={'padding-top':'0px'}), lg=3), 
                                                 dbc.Col(dbc.CardBody(
                                                         [
@@ -644,19 +644,19 @@ def update_texto(parametro, mes):
             card = dbc.Card([dbc.Row([
                                         dbc.Row(html.H6("Balanço mensal", style={'margin-top':'10px', 'margin-left':'30px'})),
                                         dbc.Row([
-                                                dbc.Col([html.Header("Jan"),
+                                                dbc.Col([html.Header("Jan", style={'color':'#A039F6'}),
                                                                     html.Header('Receita'), 
                                                                     html.Header('Despesa'),
                                                                     html.Br(),
-                                                                    html.Header("Fev"),
+                                                                    html.Header("Fev", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Mar"),
+                                                                    html.Header("Mar", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Abr"),
+                                                                    html.Header("Abr", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa")
                                                                     ], lg=2), 
@@ -676,19 +676,19 @@ def update_texto(parametro, mes):
                                                                     html.Header(f"R${abr_receita}"),
                                                                     html.Header(f"R${abr_despesa}")
                                                                     ], lg=2),
-                                                dbc.Col([html.Header("Mai"),
+                                                dbc.Col([html.Header("Mai", style={'color':'#A039F6'}),
                                                                     html.Header('Receita'), 
                                                                     html.Header('Despesa'),
                                                                     html.Br(),
-                                                                    html.Header("Jun"),
+                                                                    html.Header("Jun", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Jul"),
+                                                                    html.Header("Jul", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Ago"),
+                                                                    html.Header("Ago", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa")
                                                                     ], lg=2), 
@@ -708,19 +708,19 @@ def update_texto(parametro, mes):
                                                                     html.Header(f"R${ago_receita}"),
                                                                     html.Header(f"R${ago_despesa}")
                                                                     ], lg=2),
-                                                dbc.Col([html.Header("Set"),
+                                                dbc.Col([html.Header("Set", style={'color':'#A039F6'}),
                                                                     html.Header('Receita'), 
                                                                     html.Header('Despesa'),
                                                                     html.Br(),
-                                                                    html.Header("Out"),
+                                                                    html.Header("Out", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Nov"),
+                                                                    html.Header("Nov", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa"),
                                                                     html.Br(),
-                                                                    html.Header("Dez"),
+                                                                    html.Header("Dez", style={'color':'#A039F6'}),
                                                                     html.Header("Receita"),
                                                                     html.Header("Despesa")
                                                                     ], lg=2), 
