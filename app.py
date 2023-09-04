@@ -73,6 +73,7 @@ nome_receita = html.Header('Receita: ')
 nome_despesa = html.Header('Despesa: ')
 
 disparador = nome_receita
+
 # Layout ====================
 app.layout = html.Div([
         dbc.Row(dcc.Dropdown(options=lista_meses, value=lista_meses[-1], id='disparador-geral-meses', clearable=False, style={"width": "200px", 'border-radius': '20px', 'textAlign': 'center'}), justify='center', style={'margin-top':'5px'}),
@@ -100,8 +101,8 @@ app.layout = html.Div([
                 style={'margin-top':'10px', 'margin-left':'5px', 'margin_right':'5px', 'padding':'0px'}),
         
         dbc.Row([
-                dbc.Col([html.H5('Evolução Caixa'), dcc.Graph(figure=fig_evolucao_caixa, config={"displayModeBar": False, "showTips": False})], lg=6), 
-                dbc.Col([html.H5('Check | Mensalidades')], lg=6)
+                dbc.Col([html.H5('Evolução Caixa'), dcc.Graph(figure=fig_evolucao_caixa, config={"displayModeBar": False, "showTips": False})], lg=7), 
+                dbc.Col([html.H5('Check | Mensalidades'), html.Div(id='disparador_table')], lg=5)
                 ],
                 style={'margin-top':'10px', 'margin-left':'5px', 'margin_right':'5px', 'padding':'0px'})
 ])
@@ -167,7 +168,7 @@ def update_balanco(mes):
     Input('dpd-01-r3/c1', 'value')
 )
 def update_dropdown_function(value):
-    if value == 'Análise':
+    if value == 'Filtros':
         return lista_filtragem_categoria
     else:
         return lista_tipo_fluxo_caixa
@@ -188,7 +189,7 @@ def set_drop(set):
 def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):  
     if parametro_superior == 'Ano':
         
-        if parametro_esq == 'Análise':
+        if parametro_esq == 'Filtros':
             if parametro_dir == 'Despesas por categoria':
                 fig = go.Figure(data=go.Pie(labels=df_filter_expenses_detail['CATEGORIA'], values=df_filter_expenses_detail['VALOR_DESPESA'], hole=0.6))
                 
@@ -233,7 +234,7 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
         df_receitas_target_beta = df_filter_incomes_months.loc[df_filter_incomes_months['COMPETÊNCIA']==parametro_superior]
         df_despesas_target_beta = df_filter_expenses_months.loc[df_filter_expenses_months['COMPETÊNCIA']==parametro_superior]
         
-        if parametro_esq == 'Análise':
+        if parametro_esq == 'Filtros':
             if parametro_dir == 'Despesas por categoria':
                 fig_x = go.Figure(data=go.Pie(labels=df_despesas_target_beta['CATEGORIA'], values=df_despesas_target_beta['VALOR_DESPESA'], hole=0.6))
                 
@@ -791,7 +792,36 @@ def update_texto(parametro, mes):
                             ], style={'height':'420px'})
             return card
         
+
+@app.callback(
+    Output('disparador_table', 'children'),
+    Input('disparador-geral-meses', 'value')
+)
+def update_table(mes):
+    if mes == 'Ano':
+        columnDefs = [
+                {'field': 'PLAYER', 'width': 200, 'autosize': True},
+                {'field': 'PAGTO', 'width': 120}
+            ]
         
+        df_table_x = df_table.groupby('PLAYER').agg({'PAGTO':'sum'})
+        df_table_x = df_table_x.reset_index()
+        
+        table = dag.AgGrid(id="check-table", rowData=df_table_x.to_dict("records"), columnDefs=columnDefs, defaultColDef={"resizable": True, "sortable": True}, style={'height':'285px', 'width':'50%'})
+        
+        return table
+    
+    else:
+        df_table_y = df_table.loc[df_table['COMPETÊNCIA']==mes]
+        columnDefs = [
+                {'field': 'PLAYER', 'width': 200, 'autosize': True},
+                {'field': 'STATUS', 'width': 120}
+            ]
+        
+        table_y = dag.AgGrid(id="check-table", rowData=df_table_y.to_dict("records"), columnDefs=columnDefs, defaultColDef={"resizable": True, "sortable": True}, style={'height':'285px', 'width':'50%'})
+        
+        return table_y
+
 # Servidor
 if __name__=='__main__':
     app.run_server(debug=True)

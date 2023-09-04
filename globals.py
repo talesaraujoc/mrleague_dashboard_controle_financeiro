@@ -4,6 +4,10 @@ import pandas as pd
 df_receitas = pd.read_excel('data/receitas_2023.xlsx')
 df_despesas = pd.read_excel('data/despesas_2023.xlsx')
 
+#table
+df_table = pd.read_excel('data/controle_mensais_2023.xlsx')
+df_table['PAGTO'] = df_table['PAGTO'].apply(lambda x: float(x))
+
 #primeira alteração dataset
 df_receitas.rename(columns={"VALOR": "VALOR_RECEITA"}, inplace=True)
 df_despesas.rename(columns={"VALOR":'VALOR_DESPESA'}, inplace=True)
@@ -22,7 +26,7 @@ lista_meses = df_receitas['COMPETÊNCIA'].unique().tolist()
 lista_meses.append('Ano')
 
 # lista opções gráficos
-lista_drop_esquerda = ['Análise', 'Fluxo de Caixa']
+lista_drop_esquerda = ['Filtros', 'Fluxo de Caixa']
 lista_filtragem_categoria = ['Receitas por categoria', 'Despesas por categoria']
 lista_tipo_fluxo_caixa = ['Fluxo caixa mes/mes', 'Cashflow ano']
 
