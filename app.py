@@ -101,7 +101,7 @@ app.layout = html.Div([
                 style={'margin-top':'10px', 'margin-left':'5px', 'margin_right':'5px', 'padding':'0px'}),
         
         dbc.Row([
-                dbc.Col([html.H5('Evolução Caixa'), dcc.Graph(figure=fig_evolucao_caixa, config={"displayModeBar": False, "showTips": False})], lg=7), 
+                dbc.Col([html.H5('Evolução Caixa 23"'), dcc.Graph(figure=fig_evolucao_caixa, config={"displayModeBar": False, "showTips": False})], lg=7), 
                 dbc.Col([html.H5('Check | Mensalidades'), html.Div(id='disparador_table')], lg=5)
                 ],
                 style={'margin-top':'10px', 'margin-left':'5px', 'margin_right':'5px', 'padding':'0px'})
@@ -207,7 +207,7 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
                 return fig
                 
         else:
-            if parametro_dir == 'Fluxo caixa mes/mes':
+            if parametro_dir == 'Fluxo caixa mês/mês':
 
                 fig = make_subplots(rows=1, cols=1)
 
@@ -251,7 +251,7 @@ def update_grafico_01(parametro_esq, parametro_dir, parametro_superior):
                 
                 return fig_k
         else:
-            if parametro_dir == 'Fluxo caixa mes/mes':
+            if parametro_dir == 'Fluxo caixa mês/mês':
 
                 fig = make_subplots(rows=1, cols=1)
 
@@ -331,7 +331,7 @@ def update_texto(parametro, mes):
                                 ], style={'height':'420px'})
             return card
         
-        elif parametro == 'Fluxo caixa mes/mes':
+        elif parametro == 'Fluxo caixa mês/mês':
             jan = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Janeiro']
             jan_receita = jan['VALOR_RECEITA'].sum()
             jan_despesa = jan['VALOR_DESPESA'].sum()
@@ -592,7 +592,7 @@ def update_texto(parametro, mes):
                                 ], style={'height':'420px'})
             return card
             
-        elif parametro == 'Fluxo caixa mes/mes':
+        elif parametro == 'Fluxo caixa mês/mês':
             jan = df_year_cashflow[df_year_cashflow['COMPETÊNCIA']=='Janeiro']
             jan_receita = jan['VALOR_RECEITA'].sum()
             jan_despesa = jan['VALOR_DESPESA'].sum()
